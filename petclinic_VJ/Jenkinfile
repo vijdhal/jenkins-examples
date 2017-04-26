@@ -1,8 +1,11 @@
 node {
-   stage1(initial){
+   stage('initial'){
    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/savishy/spring-petclinic.git']]])
    }
-   stage2(install)(bat 'mvn install'
-   bat 'mvn test'
-   archiveArtifacts '**/*.war'
+   stage('install'){bat 'mvn install'
+   }
+   stage ('test'){bat 'mvn test'
+   }
+   stage ('archive'){archiveArtifacts '**/*.war'
+   }
 }
